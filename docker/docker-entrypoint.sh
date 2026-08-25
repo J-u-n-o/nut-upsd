@@ -138,9 +138,8 @@ done
 
 echo "*** NUT upsd startup ***"
 
-/bin/sh
-
-exit 0
+# /bin/sh
+# exit 0
 
 # Initialise UPS driver with the specified user
 echo "Starting UPS drivers ..."
