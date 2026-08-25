@@ -113,7 +113,7 @@ for cfgFile in ${nutCfgFiles}; do
             echo "ERROR: Config file '${nutCfgVolume}/${cfgFile}' has incorrect owner."
             echo -e "\tCurrent owner: $(stat -c '%U' ${nutCfgVolume}/${cfgFile}) (UID=$(stat -c '%u' ${nutCfgVolume}/${cfgFile}))"
             echo -e "\tRecommended owner: $nutUser (UID=$nutUid)"
-            exit 1
+            # exit 1
         fi
     else
         echo "ERROR: Config file '${nutCfgVolume}/${cfgFile}' does not exist. You should create one, have a look at the README."
