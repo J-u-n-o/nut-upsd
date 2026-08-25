@@ -31,6 +31,7 @@ RUN set -ex; \
 		openssh-client \
 		libtool \
 		avahi-libs \
+        net-snmp-libs \
 		libusb \
 		libusb-compat \
 		nss \
