@@ -3,9 +3,22 @@
 ![Docker Image Size](https://img.shields.io/docker/image-size/J-u-n-o/nut-upsd)
 
 Docker image for Network UPS Tools server published on [Docker Hub](https://hub.docker.com/r/J-u-n-o/nut-upsd), source on [GitHub](https://github.com/J-u-n-o/nut-upsd) forked from [Docker Hub](https://hub.docker.com/r/aimandebug/nut-upsd), source on [GitHub](https://github.com/aimandebug/nut-upsd).
+Using work from https://github.com/monstermuffin/nut-docker/ and  the great work of [Gianpaolo Del Matto](https://github.com/gpdm).
+
+
+Thank you.
+
+https://github.com/networkupstools/nut/issues/2987
+./us3000_tb_ota` US3000_TB_V3.3.bin
+filename: TP-0004-DCM00001
 
 ## Usage
 
+https://github.com/monstermuffin/nut-docker/
+
+ 	su-exec
+
+    
 This image provides a complete UPS monitoring service (USB driver only).
 
 Start the container:
