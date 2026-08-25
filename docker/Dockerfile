@@ -55,8 +55,6 @@ RUN set -ex; \
 	sha256sum -c -w nut-$NUT_VERSION.tar.gz.sha256; \
 	cd nut-$NUT_VERSION \
 	; \
-	./configure --help \
-	; \
 	# build
 	./configure \
 		--prefix=/usr \
@@ -78,7 +76,6 @@ RUN set -ex; \
 	# install
 	make install \
 	; \
-	; \
 	# create nut user
 	adduser -D -h /var/run/nut nut; \
 	chgrp -R nut /etc/nut; \
@@ -88,9 +85,7 @@ RUN set -ex; \
 	# cleanup
 	rm -r /tmp/nut-$NUT_VERSION.tar.gz /tmp/nut-$NUT_VERSION.tar.gz.sha256 /tmp/nut-$NUT_VERSION; \
 	rm -r /usr/share/man/man5 /usr/share/man/man8; \
-	apk del .build-deps \
-	;
-    
+	apk del .build-deps    
 
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
