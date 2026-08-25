@@ -18,6 +18,9 @@ https://github.com/monstermuffin/nut-docker/
 
  	su-exec
 
+Truenas udev type 99-us3000ups
+ATTR{idVendor}=="2b89", ATTR{idProduct}=="ffff", MODE="0664", OWNER="container", GROUP="container", SYMLINK+="us3000ups"
+
     
 This image provides a complete UPS monitoring service (USB driver only).
 
