@@ -58,7 +58,7 @@ RUN set -ex; \
 		--prefix=/usr \
 		--sysconfdir=/etc/nut \
 		--localstatedir=/var \
-		--with-all \
+		--with-all=auto \
 		--with-usb=libusb-1.0 \
 		--with-ssl=openssl \
 		--with-user=nut \
@@ -68,7 +68,7 @@ RUN set -ex; \
 		--with-pidpath=/run/nut \
 		--with-rundir=/run/nut \
 		--with-pkgconfig-dir=/usr/lib/x86_64-linux-gnu/pkgconfig \
-		--with-doc=all \
+		--with-doc=no \
 	; \
 	# install
 	make install \
