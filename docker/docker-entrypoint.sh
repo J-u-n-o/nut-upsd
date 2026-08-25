@@ -40,10 +40,20 @@ fi
 nutCfgVolume="/etc/nut"
 nutCfgFiles="ups.conf upsd.conf upsd.users"
 nutUser="nut"
-nutUid=`id -u nut`
-nutGid=`id -g nut`
 
 echo "*** NUT upsd pre-start checks ***"
+
+# Check if NUT_USER
+if [ -n "$NUT_USER" ] && [ -n "$NUT_GID" ]; then
+    echo "NUT_USER provided: NUT_USER=$NUT_USER"
+    nutUser="$NUT_USER"
+fi
+echo "nutUser: $nutUser"
+
+nutUid=`id -u $nutUser`
+nutGid=`id -g $nutUser`
+echo "nutUid: $nutUid"
+echo "nutGid: $nutGid"
 
 # Check if NUT_UID and NUT_GID are set; if so, modify the existing nut user and group
 if [ -n "$NUT_UID" ] && [ -n "$NUT_GID" ]; then
