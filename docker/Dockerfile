@@ -7,15 +7,7 @@ ARG BUILD_DATE
 # https://networkupstools.org/download.html
 ENV NUT_VERSION_RANGE="2.8"
 ENV NUT_VERSION="2.8.5"
-ENV NUT_SHA256="0130ba82ea79f04ba4f34c5249a85943977efd984ed7df6aec1a518d5a3594f8"
-
-ENV UPS_NAME="ups"
-ENV UPS_DESC="UPS"
-ENV UPS_DRIVER="usbhid-ups"
-ENV UPS_PORT="auto"
-
-ENV API_PASSWORD=""
-ENV ADMIN_PASSWORD=""
+ENV NUT_SHA256="18bf32e59eb764b13da3c4fa70384926d7fa584cb31d2fe7f137a570633eeec1"
 
 ENV SHUTDOWN_CMD="echo 'System shutdown not configured!'"
 
