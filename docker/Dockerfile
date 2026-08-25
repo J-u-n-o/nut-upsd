@@ -35,6 +35,7 @@ RUN set -ex; \
         glib \
 		libusb \
 		libusb-compat \
+        neon \
 		nss \
 	; \
 	# build dependencies
