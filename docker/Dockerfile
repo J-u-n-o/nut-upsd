@@ -29,9 +29,6 @@ RUN set -ex; \
 	apk add --update  --no-cache \
 		shadow \
 		openssh-client \
-        libsnmp \
-        libopenssl \
-        libneon \
 		libtool \
 		libusb \
 		libusb-compat \
