@@ -28,11 +28,13 @@ RUN set -ex; \
 	# run dependencies
 	apk add --update  --no-cache \
 		openssh-client \
+		libusb \
 		libusb-compat \
 		nss \
 	; \
 	# build dependencies
 	apk add --update --no-cache --virtual .build-deps \
+		libusb-dev \
 		libusb-compat-dev \
 		avahi-dev \
 		avahi-libs \
@@ -53,6 +55,8 @@ RUN set -ex; \
 	sha256sum -c -w nut-$NUT_VERSION.tar.gz.sha256; \
 	cd nut-$NUT_VERSION \
 	; \
+	./configure --help | grep -i scanner \
+	; \
 	# build
 	./configure \
 		--prefix=/usr \
@@ -69,9 +73,14 @@ RUN set -ex; \
 		--with-rundir=/run/nut \
 		--with-pkgconfig-dir=/usr/lib/x86_64-linux-gnu/pkgconfig \
 		--with-doc=no \
+		--with-nut-scanner=yes \
 	; \
 	# install
 	make install \
+	; \
+	find /usr -name 'nut-scanner*' -o -name 'libnutscan*'; \
+	which nut-scanner || true; \
+	nut-scanner --version || true; \
 	; \
 	# create nut user
 	adduser -D -h /var/run/nut nut; \
