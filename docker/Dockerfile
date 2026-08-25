@@ -34,9 +34,7 @@ RUN set -ex; \
 	# build dependencies
 	apk add --update --no-cache --virtual .build-deps \
 		libusb-compat-dev \
-		libavahi-common-dev \
 		libavahi-client-dev \
-		libavahi-core-dev \
 		net-snmp-dev \
 		openssl-dev \
 		nss-dev \
