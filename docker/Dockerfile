@@ -55,7 +55,7 @@ RUN set -ex; \
 	sha256sum -c -w nut-$NUT_VERSION.tar.gz.sha256; \
 	cd nut-$NUT_VERSION \
 	; \
-	./configure --help | grep -i scanner \
+	./configure --help \
 	; \
 	# build
 	./configure \
