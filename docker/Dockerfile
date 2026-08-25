@@ -28,12 +28,14 @@ RUN set -ex; \
 	# run dependencies
 	apk add --update  --no-cache \
 		openssh-client \
+		libtool \
 		libusb \
 		libusb-compat \
 		nss \
 	; \
 	# build dependencies
 	apk add --update --no-cache --virtual .build-deps \
+		libtool \
 		libusb-dev \
 		libusb-compat-dev \
 		avahi-dev \
