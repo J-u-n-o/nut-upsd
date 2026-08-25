@@ -80,6 +80,10 @@ if [ -n "$NUT_UID" ] && [ -n "$NUT_GID" ]; then
     # Fix ownership of files and directories associated with the updated user/group
     echo "Updating ownership of /var/run/nut"
     chown -Rv "$NUT_UID:$NUT_GID" /var/run/nut || { echo "ERROR: Failed to update ownership of /var/run/nut"; exit 1; }
+    echo "Updating ownership of /var/lib/nut"
+    chown -Rv "$NUT_UID:$NUT_GID" /var/lib/nut || { echo "ERROR: Failed to update ownership of /var/lib/nut"; exit 1; }
+    echo "Updating ownership of /var/run/nut"
+    chown -Rv "$NUT_UID:$NUT_GID" /etc/nut || { echo "ERROR: Failed to update ownership of /etc/nut"; exit 1; }
 
 else
     echo "NUT_UID and NUT_GID not provided. Using default user (UID=$nutUid, GID=$nutGid)."
