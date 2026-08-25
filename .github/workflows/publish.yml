@@ -4,7 +4,7 @@ permissions:
   contents: read
 
 env:
-  IMAGE_NAME: docker.io/botsudo/nut-upsd
+  IMAGE_NAME: docker.io/J-u-n-o/nut-upsd
 
 on:
     push:
