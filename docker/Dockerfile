@@ -84,6 +84,8 @@ RUN set -ex; \
 	chmod -R o-rwx /etc/nut; \
 	install -d -m 750 -o nut -g nut /var/run/nut \
 	; \
+	install -d -m 755 -o nut -g nut /var/lib/nut \
+    ; \
 	# cleanup
 	rm -r /tmp/nut-$NUT_VERSION.tar.gz /tmp/nut-$NUT_VERSION.tar.gz.sha256 /tmp/nut-$NUT_VERSION; \
 	rm -r /usr/share/man/man5 /usr/share/man/man8; \
