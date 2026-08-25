@@ -27,7 +27,7 @@ LABEL org.label-schema.vendor="J-u-n-o" \
 RUN set -ex; \
 	# run dependencies
 	apk add --update  --no-cache \
-		passwd \
+		shadow \
 		openssh-client \
 		libtool \
 		libusb \
