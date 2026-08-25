@@ -30,8 +30,7 @@ RUN set -ex; \
 		shadow \
 		openssh-client \
 		libtool \
-		libavahi-client3 \
-		libavahi-common3 \
+		avahi-libs \
 		libusb \
 		libusb-compat \
 		nss \
