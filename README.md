@@ -1,8 +1,8 @@
 # Network UPS Tools server
 
-![Docker Image Size](https://img.shields.io/docker/image-size/aimandebug/nut-upsd)
+![Docker Image Size](https://img.shields.io/docker/image-size/J-u-n-o/nut-upsd)
 
-Docker image for Network UPS Tools server published on [Docker Hub](https://hub.docker.com/r/aimandebug/nut-upsd), source on [GitHub](https://github.com/aimandebug/nut-upsd).
+Docker image for Network UPS Tools server published on [Docker Hub](https://hub.docker.com/r/J-u-n-o/nut-upsd), source on [GitHub](https://github.com/J-u-n-o/nut-upsd) forked from [Docker Hub](https://hub.docker.com/r/aimandebug/nut-upsd), source on [GitHub](https://github.com/aimandebug/nut-upsd).
 
 ## Usage
 
