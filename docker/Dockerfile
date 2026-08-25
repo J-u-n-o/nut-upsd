@@ -32,6 +32,7 @@ RUN set -ex; \
 		libtool \
 		avahi-libs \
         net-snmp-libs \
+        glib \
 		libusb \
 		libusb-compat \
 		nss \
