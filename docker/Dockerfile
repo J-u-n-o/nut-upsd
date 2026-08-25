@@ -52,7 +52,7 @@ RUN set -ex; \
 	cd nut-$NUT_VERSION \
 	; \
 	# build
-	RUN ./configure \
+	./configure \
 		--prefix=/usr \
 		--sysconfdir=/etc/nut \
 		--localstatedir=/var \
