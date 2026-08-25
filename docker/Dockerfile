@@ -78,9 +78,6 @@ RUN set -ex; \
 	# install
 	make install \
 	; \
-	find /usr -name 'nut-scanner*' -o -name 'libnutscan*'; \
-	which nut-scanner || true; \
-	nut-scanner --version || true; \
 	; \
 	# create nut user
 	adduser -D -h /var/run/nut nut; \
@@ -91,7 +88,9 @@ RUN set -ex; \
 	# cleanup
 	rm -r /tmp/nut-$NUT_VERSION.tar.gz /tmp/nut-$NUT_VERSION.tar.gz.sha256 /tmp/nut-$NUT_VERSION; \
 	rm -r /usr/share/man/man5 /usr/share/man/man8; \
-	apk del .build-deps
+	apk del .build-deps \
+	;
+    
 
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
