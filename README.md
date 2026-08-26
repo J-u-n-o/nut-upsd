@@ -7,6 +7,7 @@ Using work from https://github.com/monstermuffin/nut-docker/ and  the great work
 
 Thank you.
 
+see also [GitHub DartSteven/Nutify](https://github.com/DartSteven/Nutify/tree/main)
 
 ## Usage
 
