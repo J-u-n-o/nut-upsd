@@ -100,12 +100,6 @@ RUN set -ex; \
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
-    && setcap cap_setuid,cap_setgid+ep /usr/local/bin/docker-entrypoint.sh \
-    && setcap cap_setuid,cap_setgid+ep /bin/sh
-
-USER app
-
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 WORKDIR /var/run/nut
