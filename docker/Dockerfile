@@ -86,9 +86,9 @@ RUN set -ex; \
 	; \
 	# create nut user
 	adduser -D -h /var/run/nut nut; \
-	install -d -m 750 -o nut -g nut /etc/nut \
-	# chgrp -R nut /etc/nut; \
-	chmod -R o-rwx /etc/nut; \
+	#install -d -m 750 -o nut -g nut /etc/nut \
+	chown -R nut:nut /etc/nut; \
+	chmod -R 750 /etc/nut; \
 	install -d -m 750 -o nut -g nut /var/run/nut \
 	; \
 	install -d -m 750 -o nut -g nut /var/lib/nut \
