@@ -5,91 +5,58 @@
 Docker image for Network UPS Tools server published on [Docker Hub](https://hub.docker.com/r/J-u-n-o/nut-upsd), source on [GitHub](https://github.com/J-u-n-o/nut-upsd) forked from [Docker Hub](https://hub.docker.com/r/aimandebug/nut-upsd), source on [GitHub](https://github.com/aimandebug/nut-upsd).
 Using work from https://github.com/monstermuffin/nut-docker/ and  the great work of [Gianpaolo Del Matto](https://github.com/gpdm).
 
-
 Thank you.
 
-https://github.com/networkupstools/nut/issues/2987
-./us3000_tb_ota` US3000_TB_V3.3.bin
-filename: TP-0004-DCM00001
 
 ## Usage
 
-https://github.com/monstermuffin/nut-docker/
+See for configuration:
 
- 	su-exec
+[GitHub monstermuffin/nut-docker](https://github.com/monstermuffin/nut-docker/).
 
-Truenas udev type 99-us3000ups
-ATTR{idVendor}=="2b89", ATTR{idProduct}=="ffff", MODE="0664", OWNER="container", GROUP="container", SYMLINK+="us3000ups"
+
+## Truenas
+
+Setup USB device (UGreen US3000, but applies to other USB devices as well) using system advanced sysctl config item:
+
+type: udev, name: 99-us3000ups
+value:
+ATTR{idVendor}=="2b89", ATTR{idProduct}=="ffff", MODE="0664", OWNER="nut_on_host", GROUP="nut_on_host", SYMLINK+="us3000ups"
 
     
-This image provides a complete UPS monitoring service (USB driver only).
+This image provides a complete UPS monitoring service (USB driver tested only).
+
+Using nut config files as present on the host, accessed using a mounted volume.
+Container starts using root to allow changing user/group ids in the container
 
 Start the container:
+nut_on_host user id: 1234
+NUT_USER user as defined in the docker image, can be 'nut' or 'root'
+
 
 ```sh
 docker run \
-    --name nut-upsd \
-    --detach \
-    --publish 3493:3493 \
-    --device /dev/bus/usb/xxx/yyy \
-    --env SHUTDOWN_CMD="my-shutdown-command-from-container" \
-    botsudo/nut-upsd
+  -d \
+  --name nut-upsd \
+  --network docker_macvlan \
+  --ip 192.168.2.123 \
+  --mac-address 12:34:56:78:90:ab \
+  --env NUT_UID=1234  --env NUT_GID=1234  --env NUT_USER=nut \
+  -p 3493:3493 \
+  -v /mnt/host/nut:/etc/nut:ro \
+  -v /dev/bus/usb:/dev/bus/usb \
+  --device-cgroup-rule='c 189:* rmw' \
+  ghcr.io/j-u-n-o/nut-upsd:2.8.5
 ```
 
-## Auto configuration via environment variables
-
-This image supports customization via environment variables.
-
-### UPS_NAME
-
-*Default value*: `ups`
-
-The name of the UPS.
-
-### UPS_DESC
-
-*Default value*: `Eaton 5SC`
-
-This allows you to set a brief description that upsd will provide to clients that ask for a list of connected equipment.
-
-### UPS_DRIVER
-
-*Default value*: `usbhid-ups`
-
-This specifies which program will be monitoring this UPS.
-
-### UPS_PORT
-
-*Default value*: `auto`
-
-This is the serial port where the UPS is connected.
-
-### API_PORT
-
-*Default value*: `3493`
-
-This is the port used by upsd.
-
-### API_ADDRESS
-
-*Default value*: `0.0.0.0`
-
-This is the address used by upsd.
-
-### API_USER
-
-*Default value*: `upsmon`
-
-This is the username used for communication between upsmon and upsd processes.
-
-### API_PASSWORD
-
-*Default value*: `secret`
-
-This is the password for the upsmon user.
-
-### SHUTDOWN_CMD
-
-*Default value*: `echo 'System shutdown is not configured!'`
-
-This is the command upsmon will run when the system needs to be brought down. The command will be run from inside the container.
+## Misc
+Possible to use to start the app using a different UID:
+```
+ 	su-exec
+```
+Hints about updating firmware
+```
+  https://github.com/networkupstools/nut/issues/2987
+ ./us3000_tb_ota` US3000_TB_V3.3.bin
+  filename: TP-0004-DCM00001
+```
