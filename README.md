@@ -50,6 +50,95 @@ docker run \
   ghcr.io/j-u-n-o/nut-upsd:2.8.5
 ```
 
+Because the docker host cannot access its dockers using the macvlan, also use the bridge to allow a second network connection using the docker bridge to have a 'second' port accessible (only) by the docker host/Truenas server.
+
+```
+$ sudo docker network inspect bridge
+[
+    {
+        "Name": "bridge",
+        "IPAM": {
+            "Config": [
+                {
+                    "Subnet": "172.16.0.0/24",
+                    "Gateway": "172.16.0.1"
+                }
+            ]
+        },
+```
+However setting an fixed/desired ip address for the container is not allowed on the internal bridge, so create a custom bridge:
+```
+sudo docker network create \
+  --driver bridge \
+  --subnet 172.16.1.0/24 \
+  nut-bridge
+```
+and so 
+```
+sudo docker network connect --ip 172.16.1.10 nut-bridge nut-upsd
+```
+
+```
+]$ sudo docker network inspect nut-bridge
+[
+    {
+        "Name": "nut-bridge",
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "xyz": {
+                "IPv4Address": "172.16.1.10/24",
+                "IPv6Address": "fdd0:0:0:1::2/64"
+            }
+        },
+    }
+]
+```
+
+from truenas/host
+```
+$ upsc us3000ups@172.16.1.10:3493
+Init SSL without certificate database
+battery.charge: 100
+battery.charge.low: 20
+battery.runtime: 65535
+battery.type:
+device.mfr: UGREEN
+device.model: US3000
+device.serial: DC600
+device.type: ups
+driver.debug: 0
+driver.flag.allow_killpower: 0
+driver.name: usbhid-ups
+driver.parameter.interrupt_pipe_no_events_tolerance: -1
+driver.parameter.pollfreq: 30
+driver.parameter.pollinterval: 2
+driver.parameter.pollonly: enabled
+driver.parameter.port: auto
+driver.parameter.productid: ffff
+driver.parameter.subdriver: Arduino
+driver.parameter.synchronous: auto
+driver.parameter.vendorid: 2b89
+driver.state: quiet
+driver.version: 2.8.5
+driver.version.data: Arduino HID 0.22
+driver.version.internal: 0.71
+driver.version.usb: libusb-1.0.30 (API: 0x0100010C)
+input.voltage: 20.0
+output.voltage: 19.0
+ups.delay.shutdown: 20
+ups.delay.start: 30
+ups.load: 1
+ups.mfr: UGREEN
+ups.model: US3000
+ups.productid: ffff
+ups.serial: DC600
+ups.status: OL DISCHRG
+ups.timer.reboot: 0
+ups.timer.shutdown: -1
+ups.timer.start: 0
+ups.vendorid: 2b89
+```
 ## Misc
 Possible to use to start the app using a different UID:
 ```
