@@ -38,6 +38,7 @@ RUN set -ex; \
 		neon \
 		nss \
 		su-exec \
+		unzip \
 	; \
 	# build dependencies
 	apk add --update --no-cache --virtual .build-deps \
