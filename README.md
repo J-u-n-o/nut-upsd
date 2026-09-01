@@ -7,7 +7,7 @@ Using work from https://github.com/monstermuffin/nut-docker/ and  the great work
 
 Thank you.
 
-see also [GitHub DartSteven/Nutify](https://github.com/DartSteven/Nutify/tree/main)
+For an alternative see also for a NUT with weg-UI: [GitHub DartSteven/Nutify](https://github.com/DartSteven/Nutify/tree/main)
 
 ## Usage
 
@@ -18,19 +18,31 @@ See for configuration:
 
 ## Truenas
 
+(for example, match arguments with your setup/user/group)
+
 Setup USB device (UGreen US3000, but applies to other USB devices as well) using system advanced sysctl config item:
 
 type: udev, name: 99-us3000ups
 value:
 ATTR{idVendor}=="2b89", ATTR{idProduct}=="ffff", MODE="0664", OWNER="nut_on_host", GROUP="nut_on_host", SYMLINK+="us3000ups"
 
-    
+After a reboot, or reconnecting the US3000 UPS, you have 
+```
+$ ls -la /dev/us3000ups
+lrwxrwxrwx 1 root root 15 Aug 26 11:16 /dev/us3000ups -> bus/usb/003/002
+```
+and 
+```
+$ ls -la /dev/bus/usb/003/002
+crw-rw-r-- 1 nut_on_host nut_on_host 189, 257 Sep  1 14:46 /dev/bus/usb/003/002
+```
+
 This image provides a complete UPS monitoring service (USB driver tested only).
 
 Using nut config files as present on the host, accessed using a mounted volume.
 Container starts using root to allow changing user/group ids in the container
 
-Start the container:
+Start the container using host user (for example, match arguments with your setup/user):
 nut_on_host user id: 1234
 NUT_USER user as defined in the docker image, can be 'nut' or 'root'
 
@@ -95,7 +107,7 @@ sudo docker network connect --ip 172.16.1.10 nut-bridge nut-upsd
 ]
 ```
 
-from truenas/host
+From truenas/host check whether the NUT docker can be accessed, and the US3000 can be reached/read:
 ```
 $ upsc us3000ups@172.16.1.10:3493
 Init SSL without certificate database
@@ -139,7 +151,20 @@ ups.timer.shutdown: -1
 ups.timer.start: 0
 ups.vendorid: 2b89
 ```
+
+
+## Truenas UPS setup
+
+Setup the UPS service by enabling it, and fill the correct fields, see Truenas documentation
+Identifier: us3000ups
+Mode: Slave
+Remote host: your NUT docker IP
+Remote port: your NUT port used by NUT
+Port or Hostname : (empty)
+Monitor User & Password: (as setup in the NUT configFiles)
+
 ## Misc
+Things to consider, not used, and just an idea/option/feature/something-to-discard...
 Possible to use to start the app using a different UID:
 ```
  	su-exec
