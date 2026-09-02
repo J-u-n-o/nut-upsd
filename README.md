@@ -9,6 +9,11 @@ Thank you.
 
 For an alternative see also for a NUT with weg-UI: [GitHub DartSteven/Nutify](https://github.com/DartSteven/Nutify/tree/main)
 
+And InstantLinux (https://hub.docker.com/r/instantlinux/nut-upsd) is (in the process of) updating to latest package on Alpine Linux: 2.8.5-r1  
+https://pkgs.alpinelinux.org/packages?name=nut&branch=edge&repo=&arch=x86_64&origin=&flagged=&maintainer=  
+See commit:
+https://github.com/instantlinux/docker-tools/commit/84829e327dcd0df803a5da353189b8f4f3cb57af
+
 ## Usage
 
 See for configuration:
